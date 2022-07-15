@@ -1,6 +1,6 @@
 import { createTheme } from "@mui/material/styles";
 import { Theme, ThemeProvider } from "@mui/material";
-import React, { useState, useMemo, createContext } from "react";
+import React, { useState, useMemo, createContext, useEffect, FC } from "react";
 import { parseCookies, setCookie } from "nookies";
 import { useRouter } from "next/router";
 import Color from "color";
@@ -8,9 +8,11 @@ import Color from "color";
 declare module "@mui/material/styles" {
   interface Palette {
     gradient: any;
+    type: any;
   }
   interface PaletteOptions {
     gradient: any;
+    type: any;
   }
   interface Theme {
     config?: any;
@@ -284,6 +286,7 @@ export const whitelogo = "/icon/gistda-logo-white.png";
 
 export const ThemeConfig: any = {
   default: {
+    type: "default",
     mode: "light",
     primary: {
       main: `#4685F7`,
@@ -333,6 +336,7 @@ export const ThemeConfig: any = {
     },
   },
   dark: {
+    type: "dark",
     mode: "light",
     primary: {
       main: `#000000`,
@@ -394,7 +398,9 @@ const initalState: IThemeContext = {
 // ? darkTheme
 // : lightTheme,
 export const ThemeContext = createContext<IThemeContext>(initalState);
-export const ThemeContextProvider = (props: any) => {
+export const ThemeContextProvider: FC<{ children: React.ReactNode }> = (
+  props
+) => {
   const cookies = parseCookies();
   const [theme, settheme] = useState<any>(
     createTheme({
@@ -1121,19 +1127,17 @@ export const ThemeContextProvider = (props: any) => {
     })
   );
 
-  useMemo(
-    () =>
-      settheme({
-        ...theme,
-        palette:
-          ThemeConfig[
-            cookies[process.env.NEXT_PUBLIC_THEME]
-              ? cookies[process.env.NEXT_PUBLIC_THEME]
-              : "default"
-          ],
-      }),
-    [cookies[process.env.NEXT_PUBLIC_THEME]]
-  );
+  useMemo(() => {
+    settheme({
+      ...theme,
+      palette:
+        ThemeConfig[
+          cookies[process.env.NEXT_PUBLIC_THEME]
+            ? cookies[process.env.NEXT_PUBLIC_THEME]
+            : "default"
+        ],
+    });
+  }, [cookies[process.env.NEXT_PUBLIC_THEME]]);
 
   const Theme = useMemo(() => {
     cookies[process.env.NEXT_PUBLIC_THEME] === undefined &&

@@ -2,13 +2,13 @@ import { Box, Button, Typography, useTheme } from "@mui/material";
 import type { NextPage } from "next";
 import { parseCookies, setCookie } from "nookies";
 import { Fragment, useContext } from "react";
-import { ThemeContext } from "../context/theme";
+import { ThemeConfig, ThemeContext } from "../context/theme";
 
 const Home: NextPage = () => {
   const theme = useTheme();
   const cookies = parseCookies();
   const { settheme } = useContext(ThemeContext);
-  console.log(theme);
+
   return (
     <Box>
       <Fragment>
@@ -16,10 +16,18 @@ const Home: NextPage = () => {
         <Button
           variant="contained"
           onClick={() => {
+            settheme({
+              ...theme,
+              palette:
+                ThemeConfig[
+                  theme.palette.type === "default" ? "dark" : "default"
+                ],
+            });
+
             setCookie(
               null,
               process.env.NEXT_PUBLIC_THEME,
-              cookies.default === "default" ? "dark" : "default"
+              theme.palette.type === "default" ? "dark" : "default"
             );
           }}
         >
