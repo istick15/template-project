@@ -1,9 +1,7 @@
 import { createTheme } from "@mui/material/styles";
-import { Theme, ThemeProvider } from "@mui/material";
-import React, { useState, useMemo, createContext, useEffect, FC } from "react";
+import { alpha, ThemeProvider } from "@mui/material";
+import React, { useState, useMemo, createContext, FC } from "react";
 import { parseCookies, setCookie } from "nookies";
-import { useRouter } from "next/router";
-import Color from "color";
 
 declare module "@mui/material/styles" {
   interface Palette {
@@ -1055,33 +1053,27 @@ export const ThemeContextProvider: FC<{ children: React.ReactNode }> = (
                 },
                 "& .MuiOutlinedInput-root": {
                   borderRadius: 4,
-                  background: Color(theme.palette.glassmorphism.glassmorphism1)
-                    .alpha(0.3)
-                    .hsl()
-                    .string(),
+                  background: alpha(
+                    theme.palette.glassmorphism.glassmorphism1,
+                    0.3
+                  ),
                   "& fieldset": {
-                    borderColor: Color(
-                      theme.palette.glassmorphism.glassmorphism1
-                    )
-                      .alpha(0.3)
-                      .hsl()
-                      .string(),
+                    borderColor: alpha(
+                      theme.palette.glassmorphism.glassmorphism1,
+                      0.3
+                    ),
                   },
                   "&:hover fieldset": {
-                    borderColor: Color(
-                      theme.palette.glassmorphism.glassmorphism1
-                    )
-                      .alpha(0.3)
-                      .hsl()
-                      .string(),
+                    borderColor: alpha(
+                      theme.palette.glassmorphism.glassmorphism1,
+                      0.3
+                    ),
                   },
                   "&.Mui-focused fieldset": {
-                    borderColor: Color(
-                      theme.palette.glassmorphism.glassmorphism1
-                    )
-                      .alpha(0.3)
-                      .hsl()
-                      .string(),
+                    borderColor: alpha(
+                      theme.palette.glassmorphism.glassmorphism1,
+                      0.3
+                    ),
                   },
                   "&.Mui-error fieldset": {
                     color: theme.palette.error.main,
