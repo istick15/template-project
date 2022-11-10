@@ -12,9 +12,9 @@ const Home: NextPage = () => {
   return (
     <Box>
       <Fragment>
-        <Typography variant="H1_Kanit_Light_32px">Theme</Typography>
         <Button
-          variant="contained"
+          variant="gradient"
+          color="gradient1"
           onClick={() => {
             settheme({
               ...theme,
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
             );
           }}
         >
-          ssss
+          Theme
         </Button>
       </Fragment>
     </Box>
