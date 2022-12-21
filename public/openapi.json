@@ -1,0 +1,56 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Data Service-Sattelite",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "http://{{host}}"
+    }
+  ],
+  "components": {
+    "securitySchemes": {
+      "noauthAuth": {
+        "type": "http",
+        "scheme": "noauth"
+      }
+    }
+  },
+  "paths": {
+    "/features/1.0/collections/{collectionId}/items": {
+      "get": {
+        "tags": [
+          "default"
+        ],
+        "summary": "จุดความร้อน ระบบ MODIS-level7 (รายวัน)",
+        "description": "เรียกดูรายการสิ่งที่นำเสนอปรากฏการณ์บนโลก ของชุดข้อมูลนั้น ๆ โดยการระบุ `collectionId` ผลลัพธ์จะอยู่ในรูปแบบของ `GeoJSON` ประเภท `FeatureCollection`\n\nหมายเหตุ: เป็นมาตรฐาน `OGC API - Features`",
+        "security": [
+          {
+            "noauthAuth": []
+          }
+        ],
+        "parameters": [
+          {
+            "name": "collectionId",
+            "in": "path",
+            "schema": {
+              "type": "string"
+            },
+            "required": true,
+            "description": "รหัสชุดข้อมูลของสิ่งที่นำเสนอปรากฏการณ์บนโลก",
+            "example": "63a2b963c1d0a3224c3687bc"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    }
+  }
+}
