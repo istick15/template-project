@@ -1,45 +1,187 @@
 {
-  "openapi": "3.0.0",
+  "openapi": "3.0.3",
   "info": {
-    "title": "Data Service-Sattelite",
-    "version": "1.0.0"
+    "title": "Sattelite Data Service",
+    "description": "",
+    "version": "1.3.0"
   },
   "servers": [
     {
-      "url": "http://{{host}}"
+      "url": "https://smartcity.gistda.or.th/core/api",
+      "description": "Sattelite Data Service"
     }
   ],
-  "components": {
-    "securitySchemes": {
-      "noauthAuth": {
-        "type": "http",
-        "scheme": "noauth"
-      }
+  "tags": [
+    {
+      "name": "ข้อมูลความหนาแน่นของอาคาร ในรูปแบบ H3 L7"
     }
-  },
+  ],
   "paths": {
     "/features/1.0/collections/{collectionId}/items": {
       "get": {
-        "tags": [
-          "default"
-        ],
-        "summary": "จุดความร้อน ระบบ MODIS-level7 (รายวัน)",
-        "description": "เรียกดูรายการสิ่งที่นำเสนอปรากฏการณ์บนโลก ของชุดข้อมูลนั้น ๆ โดยการระบุ `collectionId` ผลลัพธ์จะอยู่ในรูปแบบของ `GeoJSON` ประเภท `FeatureCollection`\n\nหมายเหตุ: เป็นมาตรฐาน `OGC API - Features`",
+        "tags": ["ข้อมูลความหนาแน่นของอาคาร ในรูปแบบ H3 L7"],
+        "summary": "get feature  list",
+        "description": "When you need to fetch or get the Vallaris Feature of the Feature Collection with id `collectionId`. Every Feature in a dataset belongs to a collection. A dataset may consist of multiple Feature Collections. A Feature Collection is often a collection of features of a similar type, based on a common schema. Use content negotiation to request HTML or GeoJSON. \n\nGET is method you can use along with API key in Vallaris",
         "security": [
           {
-            "noauthAuth": []
+            "apiKey": []
           }
         ],
         "parameters": [
           {
             "name": "collectionId",
             "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "example": "63a29b13d7b1792e9d84a973"
+            }
+          },
+          {
+            "name": "bbox",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "array",
+              "minItems": 4,
+              "maxItems": 6,
+              "items": {
+                "type": "number"
+              }
+            },
+            "style": "form",
+            "explode": false,
+            "description": "x-min,y-min,[z-min],x-max,y-max,[z-max] (4 or 6 numbers)"
+          },
+          {
+            "name": "datetime",
+            "in": "query",
+            "style": "form",
             "schema": {
               "type": "string"
             },
+            "description": "ISO datetime (UTC) \"2020-11-23T05:50:44.732Z/..\""
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 10000,
+              "default": 10
+            },
+            "description": "limit data minimum = 1. maximum = 10000. default = 10."
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "style": "form",
+            "schema": {
+              "type": "integer",
+              "default": 0
+            },
+            "description": "skip data"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/maps/1.0-beta/maps/{styleId}/tms/{z}/{x}/{y}.png": {
+      "get": {
+        "tags": ["ข้อมูลความหนาแน่นของอาคาร ในรูปแบบ H3 L7"],
+        "summary": "get Tile Map Service (TMS)",
+        "parameters": [
+          {
+            "name": "styleId",
+            "in": "path",
             "required": true,
-            "description": "รหัสชุดข้อมูลของสิ่งที่นำเสนอปรากฏการณ์บนโลก",
-            "example": "63a2b963c1d0a3224c3687bc"
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{apikey}}"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/maps/1.0-beta/maps/{styleId}/wms": {
+      "get": {
+        "tags": ["ข้อมูลความหนาแน่นของอาคาร ในรูปแบบ H3 L7"],
+        "summary": "get Web Map Service (WMS)",
+        "parameters": [
+          {
+            "name": "styleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{apikey}}",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/maps/1.0-beta/maps/{styleId}/wmts": {
+      "get": {
+        "tags": ["ข้อมูลความหนาแน่นของอาคาร ในรูปแบบ H3 L7"],
+        "summary": "get Web Map Tile Service (WMTS)",
+        "parameters": [
+          {
+            "name": "styleId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "api_key",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "{{apikey}}",
+            "required": true
           }
         ],
         "responses": {
