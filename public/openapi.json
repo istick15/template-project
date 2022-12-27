@@ -29,7 +29,8 @@
     {
       "name": "ข้อมูลความหนาแน่นของจุดความร้อน ระบบ VIIRS 375m / NOAA-20 (รายวัน)"
     },
-    { "name": "ข้อมูลความหนาแน่นของจุดความร้อน ระบบ MODIS (รายวัน)" }
+    { "name": "ข้อมูลความหนาแน่นของจุดความร้อน ระบบ MODIS (รายวัน)" },
+    { "name": "OSM Basemaps" }
   ],
   "paths": {
     "/features/1.0/collections/63a29b13d7b1792e9d84a973/items": {
@@ -1217,6 +1218,82 @@
     "/maps/1.0-beta/maps/63a2efe586a94e33e2ffb0df/wmts": {
       "get": {
         "tags": ["ข้อมูลความหนาแน่นของจุดความร้อน ระบบ MODIS (รายวัน)"],
+        "summary": "get Web Map Tile Service (WMTS)",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "FoU3JcXgyAVwHCfdQMJDVFojMclWeCvaNUdar6SxnxzceCdKTvlTrEtA36kgufzl",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+
+    "/maps/1.0-beta/maps/63aaa2f3197ac8e357b5ef71/tms/{z}/{x}/{y}.png": {
+      "get": {
+        "tags": ["OSM Basemaps"],
+        "summary": "get Tile Map Service (TMS)",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "FoU3JcXgyAVwHCfdQMJDVFojMclWeCvaNUdar6SxnxzceCdKTvlTrEtA36kgufzl"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/maps/1.0-beta/maps/63aaa2f3197ac8e357b5ef71/wms": {
+      "get": {
+        "tags": ["OSM Basemaps"],
+        "summary": "get Web Map Service (WMS)",
+        "parameters": [
+          {
+            "name": "api_key",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            },
+            "example": "FoU3JcXgyAVwHCfdQMJDVFojMclWeCvaNUdar6SxnxzceCdKTvlTrEtA36kgufzl",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "content": {
+              "application/json": {}
+            }
+          }
+        }
+      }
+    },
+    "/maps/1.0-beta/maps/63aaa2f3197ac8e357b5ef71/wmts": {
+      "get": {
+        "tags": ["OSM Basemaps"],
         "summary": "get Web Map Tile Service (WMTS)",
         "parameters": [
           {
