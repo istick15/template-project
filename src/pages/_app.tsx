@@ -6,6 +6,7 @@ import { CacheProvider, EmotionCache } from "@emotion/react";
 import createEmotionCache from "../styles/createEmotionCache";
 import dynamic from "next/dynamic";
 import "../styles/globals.css";
+import Meta from "../components/meta";
 const ThemeContextProvider = dynamic(
   () => import("../context/theme").then((mod) => mod.ThemeContextProvider),
   { ssr: false }
@@ -21,6 +22,7 @@ export default function MyApp(props: MyAppProps) {
   const { Component, emotionCache = clientSideEmotionCache, pageProps } = props;
   return (
     <CacheProvider value={emotionCache}>
+      <Meta title={"template"} />
       <Head>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>

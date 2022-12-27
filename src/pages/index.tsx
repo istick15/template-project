@@ -13,8 +13,7 @@ const Home: NextPage = () => {
     <Box>
       <Fragment>
         <Button
-          variant="gradient"
-          color="gradient1"
+          variant="contained"
           onClick={() => {
             settheme({
               ...theme,
