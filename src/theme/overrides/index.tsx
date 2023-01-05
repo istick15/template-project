@@ -9,6 +9,8 @@ import TextField from "./TextField";
 import ToggleButton from "./ToggleButton";
 import Autocomplete from "./AutoComplete";
 import List from "./List";
+import Chip from "./Chip";
+import Select from "./Select";
 
 export default function ComponentsOverrides(theme: Theme) {
   return Object.assign(
@@ -18,9 +20,11 @@ export default function ComponentsOverrides(theme: Theme) {
     Paper(theme),
     Menu(theme),
     Button(theme),
+    Select(theme),
     TextField(theme),
     ToggleButton(theme),
     Autocomplete(theme),
-    List(theme)
+    List(theme),
+    Chip(theme)
   );
 }

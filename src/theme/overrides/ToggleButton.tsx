@@ -1,13 +1,11 @@
-import { Theme } from "@mui/material/styles";
-
-export default function ToggleButton(theme: Theme) {
+export default function ToggleButton(theme: any) {
   return {
     MuiToggleButton: {
       styleOverrides: {
-        root: ({ theme }: any) => ({
+        root: {
           border: "unset",
           color: theme.palette.primary.contrastText,
-        }),
+        },
       },
     },
   };

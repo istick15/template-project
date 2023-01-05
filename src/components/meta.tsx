@@ -139,7 +139,7 @@ const Meta: FC<MetaProps> = ({ path, title }) => {
         }}
       />
 
-      <title>{title ? `${title} - ${APP_PLATFORM}` : APP_PLATFORM}</title>
+      <title>{title ? `${title} | ${APP_PLATFORM}` : APP_PLATFORM}</title>
     </Head>
   );
 };
