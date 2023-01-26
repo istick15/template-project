@@ -29,8 +29,7 @@ const TransitionPage: FC<{ loading: boolean; children: ReactNode }> = ({
           }}
         >
           <Box>
-            <Box
-              component={motion.div}
+            <motion.div
               animate={{
                 scale: [1, 2, 2, 1, 1],
                 rotate: [0, 90, 180, 180, 0],
@@ -43,25 +42,13 @@ const TransitionPage: FC<{ loading: boolean; children: ReactNode }> = ({
                 repeat: Infinity,
                 repeatDelay: 1,
               }}
-              sx={{
+              style={{
                 width: 60,
                 height: 60,
                 ...theme.config.jusCenter,
-                background: "white",
-                backgroundClip: "padding-box" /* !importanté */,
-                border: `solid 5px transparent` /* !importanté */,
-                "&:before": {
-                  content: `''`,
-                  position: "absolute",
-                  top: 0,
-                  right: 0,
-                  bottom: 0,
-                  left: 0,
-                  zIndex: -1,
-                  borderRadius: "inherit",
-                  background: theme.palette.gradient.gradient3,
-                  margin: "-5px",
-                },
+                background: theme.palette.gradient.gradient3,
+                backgroundClip: "padding-box",
+                border: `solid 5px transparent`,
               }}
             >
               <SvgIcon
@@ -73,7 +60,7 @@ const TransitionPage: FC<{ loading: boolean; children: ReactNode }> = ({
                 }}
                 color={"white"}
               />
-            </Box>
+            </motion.div>
           </Box>
         </motion.div>
       )}

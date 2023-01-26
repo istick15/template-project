@@ -178,20 +178,6 @@ export const ThemeContextProvider: FC<{ children: React.ReactNode }> = (
     })
   );
 
-  // useMemo(() => {
-  //   const getTheme = async () => {
-  //     const fetc = await fetch("http://localhost:3000/api/getTheme")
-  //       .then((rs) => rs.json())
-  //       .then((rs) => rs)
-  //       .catch((err) => err);
-  //     if (fetc && fetc.data) {
-  //       settheme(createTheme(JSON.parse(fetc.data)));
-  //     }
-  //   };
-
-  //   getTheme();
-  // }, []);
-
   useMemo(() => {
     settheme({
       ...theme,
@@ -212,8 +198,6 @@ export const ThemeContextProvider: FC<{ children: React.ReactNode }> = (
       }),
     });
   }, [cookies[process.env.NEXT_PUBLIC_THEME]]);
-
-  // theme.components = ComponentsOverrides(theme);
 
   const Theme = useMemo(() => {
     cookies[process.env.NEXT_PUBLIC_THEME] === undefined &&
